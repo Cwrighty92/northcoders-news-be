@@ -15,7 +15,7 @@ describe("", () => {
   beforeEach(() => {
     return seedDB(
       testData.topics,
-      testDagta.users,
+      testData.users,
       testData.articles,
       testData.comments
     ).then(docs => {
@@ -45,7 +45,12 @@ describe("", () => {
             );
           });
       });
-      it("Returns ")
+      it("Returns all Articles for certain Topic", () => {
+        console.log(topicDoc[0]._id);
+        return request
+          .get(`/api/topics/${topicDoc[0]._id}/articles)`)
+          .expect(200);
+      });
     });
   });
 });
