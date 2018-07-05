@@ -7,11 +7,11 @@ const getUser = (req, res, next) => {
       if (user === null || undefined)
         next({
           status: 404,
-          message: `No user found pease try again: ${userId}`
+          message: `No user found with given userName`
         });
       else res.status(200).send({ user });
     })
     .catch(next);
 };
 
-module.exports = getUser
+module.exports = getUser;

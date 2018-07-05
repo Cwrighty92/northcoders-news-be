@@ -3,7 +3,7 @@ const { Topic } = require("../models");
 const { Article } = require("../models/");
 
 const getAllTopics = (req, res, next) => {
-  Topic.find()
+  return Topic.find()
     .then(topics => {
       res.status(200).send({ topics });
     })
@@ -11,21 +11,24 @@ const getAllTopics = (req, res, next) => {
 };
 
 const getAllArticlesByTopic = (req, res, next) => {
-  Article.find({ belongs_to: req.params.topic })
+  return Article.find({ belongs_to: req.params.topic })
     .populate("belongs_to", "slug -_id")
     .then(articles => {
-      res.status(200).send({ articles });
+      if (articles.length === 0) {
+        next({ status: 404, message: "Page not found" });
+      } else res.status(200).send({ articles });
     })
     .catch(next);
 };
 
 const addArticleToTopic = (req, res, next) => {
-  const { title, created_by, body, belongs_to } = req.body;
-  const newArticle = new Article({ title, created_by, body, belongs_to });
-  newArticle
-    .save()
-    .then(article => {
-      res.status(201).send({ msg: "Article posted!", article });
+  const newArticle = new Article(req.body);
+  newArticle.belongs_to = req.params.topic;
+  Article.create(newArticle)
+    .then(() => {
+      res
+        .status(201)
+        .send({ message: "You have added a new Article", newArticle });
     })
     .catch(next);
 };
