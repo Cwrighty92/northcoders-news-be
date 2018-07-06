@@ -1,5 +1,6 @@
 const { User } = require("../models/index");
 
+//completed tests
 const getUser = (req, res, next) => {
   const userId = req.params;
   User.findOne({ username: userId.username })

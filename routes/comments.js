@@ -1,14 +1,14 @@
 const commentRouter = require("express").Router();
 const {
   getAllComments,
-  incrementCommentVote,
+  voteCommentUpAndDown,
   deleteComment
 } = require("../controllers/comments");
 
 commentRouter.get("/", getAllComments);
 commentRouter
   .route("/:comment")
-  .put(incrementCommentVote)
+  .put(voteCommentUpAndDown)
   .delete(deleteComment);
 
 module.exports = commentRouter;

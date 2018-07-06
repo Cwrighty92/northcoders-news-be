@@ -25,8 +25,8 @@ describe("BeforeEachTest<<<<", () => {
   after(() => {
     return mongoose.disconnect();
   });
-  describe("NorthCoders News<<<<<", () => {
-    describe("Topics <<<<<<<<<", () => {
+  describe("<<<<<<<NorthCoders News>>>>>>", () => {
+    describe("<<<<<<<<<Topics>>>>>>>>>", () => {
       console.log("connecting");
       it("Returns all Topics with Status 200 with valid url", () => {
         return request
@@ -77,7 +77,18 @@ describe("BeforeEachTest<<<<", () => {
           .expect(400)
           .then(res => {
             expect(res.body.message).to.equal(
-              `${test} is in an incorrect format Check the ReadMe`
+              `${test} is in an incorrect format or does not exist Check the ReadMe`
+            );
+          });
+      });
+      it("Returns error status of 400 with invalid mongo Id", () => {
+        const test = 2342;
+        return request
+          .get(`/api/topics/${test}/articles`)
+          .expect(400)
+          .then(res => {
+            expect(res.body.message).to.equal(
+              `${test} is in an incorrect format or does not exist Check the ReadMe`
             );
           });
       });
@@ -120,6 +131,17 @@ describe("BeforeEachTest<<<<", () => {
             );
           });
       });
+      it("Test posting an article another incorrect format", () => {
+        return request
+          .post(`/api/topics/${topicDoc[0]._id}/articles`)
+          .send({ anything: "Blah Blah Blah", anything2: 2324 })
+          .expect(400)
+          .then(res => {
+            expect(res.body.message).to.equal(
+              "The object provided is not in the correct format please see the readMe for guidance"
+            );
+          });
+      });
       it("Test posting an article when the topic does not exsist", () => {
         const title = "Code Memorys";
         const body = "Some Thoughts Here";
@@ -135,7 +157,7 @@ describe("BeforeEachTest<<<<", () => {
           });
       });
     });
-    describe.only("Users <<<<<<<", () => {
+    describe("<<<<<<<<<<Users>>>>>>>>>", () => {
       it("Check we can grab the user by searching with the userID with a status of 200", () => {
         return request
           .get("/api/users/dedekind561")
@@ -181,6 +203,264 @@ describe("BeforeEachTest<<<<", () => {
           .then(res => {
             expect(res.body.message).to.equal(
               "Page not found with given userName, it does not exist"
+            );
+          });
+      });
+    });
+    describe("<<<<<<<<<<<Articles>>>>>>>>>>>", () => {
+      it("Check can get all articles and also status 200", () => {
+        return request
+          .get("/api/articles")
+          .expect(200)
+          .then(res => {
+            expect(res.body.articles.length).to.equal(4);
+            expect(res.body.articles[0]).to.have.all.keys(
+              "votes",
+              "_id",
+              "title",
+              "body",
+              "commentCount",
+              "created_at",
+              "created_by",
+              "belongs_to",
+              "__v"
+            );
+          });
+      });
+      it("Check can get all of one articles comments", () => {
+        return request
+          .get(`/api/articles/${articleDoc[0]._id}/comments`)
+          .expect(200)
+          .then(res => {
+            expect(res.body.comments.length).to.equal(2);
+            expect(res.body.comments[0]).to.have.all.keys(
+              "votes",
+              "_id",
+              "body",
+              "belongs_to",
+              "created_by",
+              "created_at",
+              "__v"
+            );
+          });
+      });
+      it("Check error occurs when an invalid aritcle has been entered", () => {
+        return request
+          .get("/api/articles/abc/comments")
+          .expect(400)
+          .then(res => {
+            expect(res.body.message).to.equal(
+              "abc is in an incorrect format or does not exist Check the ReadMe"
+            );
+          });
+      });
+
+      it("Check we can add a comment ot an article in test", () => {
+        return request
+          .post(`/api/articles/${articleDoc[0]._id}/comments`)
+          .send({
+            body: "Test Comment",
+            created_by: `${userDoc[0]._id}`,
+            belongs_to: `${articleDoc[0]._id}`
+          })
+          .expect(201)
+          .then(res => {
+            expect(res.body.comment).to.contain.all.keys(
+              "votes",
+              "_id",
+              "created_by",
+              "body",
+              "belongs_to",
+              "created_at",
+              "__v"
+            );
+          });
+      });
+
+      it("Check we can not add a comment in the wrong format", () => {
+        return request
+          .post(`/api/articles/${articleDoc[0]._id}/comments`)
+          .send({
+            anything: "blah blah blah"
+          })
+          .expect(400)
+          .then(res => {
+            expect(res.body.message).to.equal(
+              "The object provided is not in the correct format please see the readMe for guidance"
+            );
+          });
+      });
+      it("Check we can not add a comment in another wrong format", () => {
+        return request
+          .post(`/api/articles/${articleDoc[0]._id}/comments`)
+          .send({ anything: "blah blah blah", anythngAgain: 3232 })
+          .expect(400)
+          .then(res => {
+            expect(res.body.message).to.equal(
+              "The object provided is not in the correct format please see the readMe for guidance"
+            );
+          });
+      });
+
+      it("Check voting system works when adding a vote on", () => {
+        return request
+          .get("/api/articles")
+          .expect(200)
+          .then(res => {
+            expect(res.body.articles[0].votes).to.equal(0);
+          })
+          .then(res => {
+            return request
+              .put(`/api/articles/${articleDoc[0]._id}?vote=up`)
+              .expect(200)
+              .then(res => {
+                expect(res.body.article.n).to.equal(1);
+              })
+              .then(res => {
+                return request
+                  .get("/api/articles")
+                  .expect(200)
+                  .then(res => {
+                    expect(res.body.articles[0].votes).to.equal(1);
+                  });
+              });
+          });
+      });
+      it("Check voting system works when vote is 0 that it can't be reduced any further", () => {
+        return request
+          .get("/api/articles")
+          .expect(200)
+          .then(res => {
+            expect(res.body.articles[2].votes).to.equal(0);
+          })
+          .then(res => {
+            return request
+              .put(`/api/articles/${articleDoc[0]._id}?vote=down`)
+              .expect(200)
+              .then(res => {
+                expect(res.body.article.n).to.equal(1);
+              })
+              .then(res => {
+                return request
+                  .get("/api/articles")
+                  .expect(200)
+                  .then(res => {
+                    expect(res.body.articles[2].votes).to.equal(0);
+                  });
+              });
+          });
+      });
+      it("Check invalid vote query", () => {
+        return request
+          .put(`/api/articles/${articleDoc[0]._id}?vote=wrong`)
+          .expect(400)
+          .then(res => {
+            expect(res.body.message).to.equal(
+              "Bad request: Only takes up or down query to make a vote"
+            );
+          });
+      });
+    });
+
+    describe("<<<<<<<<<Comments>>>>>>>>>>>>", () => {
+      it("Check can get all comments and also status 200", () => {
+        return request
+          .get("/api/comments")
+          .expect(200)
+          .then(res => {
+            expect(res.body.comments.length).to.equal(8);
+            expect(res.body.comments[0]).to.have.all.keys(
+              "votes",
+              "_id",
+              "body",
+              "belongs_to",
+              "created_by",
+              "created_at",
+              "__v"
+            );
+          });
+      });
+      it("Check voting system works when adding a vote on", () => {
+        return request
+          .get("/api/comments")
+          .expect(200)
+          .then(res => {
+            expect(res.body.comments[0].votes).to.equal(7);
+          })
+          .then(res => {
+            return request
+              .put(`/api/comments/${commentDoc[0]._id}?vote=up`)
+              .expect(200)
+              .then(res => {
+                expect(res.body.comment.n).to.equal(1);
+              })
+              .then(res => {
+                return request
+                  .get("/api/comments")
+                  .expect(200)
+                  .then(res => {
+                    expect(res.body.comments[0].votes).to.equal(8);
+                  });
+              });
+          });
+      });
+      it("Check voting system works when removing a vote", () => {
+        return request
+          .get("/api/comments")
+          .expect(200)
+          .then(res => {
+            expect(res.body.comments[0].votes).to.equal(7);
+          })
+          .then(res => {
+            return request
+              .put(`/api/comments/${commentDoc[0]._id}?vote=down`)
+              .expect(200)
+              .then(res => {
+                expect(res.body.comment.n).to.equal(1);
+              })
+              .then(res => {
+                return request
+                  .get("/api/comments")
+                  .expect(200)
+                  .then(res => {
+                    expect(res.body.comments[0].votes).to.equal(6);
+                  });
+              });
+          });
+      });
+      it("Check invalid vote query", () => {
+        return request
+          .put(`/api/articles/${articleDoc[0]._id}?vote=wrong`)
+          .expect(400)
+          .then(res => {
+            expect(res.body.message).to.equal(
+              "Bad request: Only takes up or down query to make a vote"
+            );
+          });
+      });
+      it("DELETE returns status 204 and body is empty", () => {
+        return request
+          .delete(`/api/comments/${commentDoc[0]._id}`)
+          .expect(204)
+          .then(res => {
+            expect(res.body).to.be.empty;
+          });
+      });
+      it("DELETE returns status 204 and body is empty", () => {
+        return request
+          .delete(`/api/comments/${commentDoc[0]._id}`)
+          .expect(204)
+          .then(res => {
+            expect(res.body).to.be.empty;
+          });
+      });
+      it("DELETE returns status 204 and body is empty", () => {
+        return request
+          .delete(`/api/comments/asdasdasda`)
+          .expect(400)
+          .then(res => {
+            expect(res.body.message).to.be.equal(
+              "asdasdasda is in an incorrect format or does not exist Check the ReadMe"
             );
           });
       });

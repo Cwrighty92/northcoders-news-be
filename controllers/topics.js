@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { Topic } = require("../models");
 const { Article } = require("../models/");
 
+//completed tests
 const getAllTopics = (req, res, next) => {
   return Topic.find()
     .then(topics => {
@@ -10,6 +11,7 @@ const getAllTopics = (req, res, next) => {
     .catch(next);
 };
 
+//completed tests - need to impliment CommentCount items in articles
 const getAllArticlesByTopic = (req, res, next) => {
   return Article.find({ belongs_to: req.params.topic })
     .populate("belongs_to", "slug -_id")
@@ -21,6 +23,7 @@ const getAllArticlesByTopic = (req, res, next) => {
     .catch(next);
 };
 
+//completed tests
 const addArticleToTopic = (req, res, next) => {
   const newArticle = new Article(req.body);
   newArticle.belongs_to = req.params.topic;

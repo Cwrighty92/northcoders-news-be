@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northcoders News API Documentation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+</head>
+
+<body>
+  <section class="section">
+    <div class="content">
+      <h2 class="title is-1">
+        NothCoders News
+      </h2>
+      <h2>
+        API Endpoints
+      </h2>
+      <h3>
+        <strong>GET</strong> /api
+      </h3>
+      <p>Returns you to this page</p>
+      <h3>
+        <h3>
+          <strong>GET</strong> /api/topics
+        </h3>
+        <p>Returns all Topics</p>
+        <h3>
+          <strong>GET</strong> /api/topics/:topic_id/articles
+        </h3>
+        <p>Using a valid topic_id gained from Get /api/topics Return all articles for that Topic</p>
+        <h3>
+          <strong>GET</strong> /api/articles</h3>
+        <p>Returns all articles</p>
+        <h3>
+          <strong>GET</strong>/api/articles/:aritcle_id/comments
+        </h3>
+        <p>Using a valid article_id gained from Get api/articles Return all comments for that Article</p>
+        <h3>
+          <strong>POST</strong> /api/articles/:article_id/comments
+        </h3>
+        <p>Add a new comment to an article. This route requires a JSON body in the following format with the exact keys e.g:
+          {"body" : "This is my comment", "created_by" : "5b3deafebc9b707a5c4d20c9", "belongs_to" : ":article_id"} psssttt
+          the article_id is what was used in the url</p>
+        <h3>
+          <Strong>PUT</Strong> /api/articles/:article_id</h3>
+        <p>Increment or Decrement the votes of an article by one. This route will require a vote query of "up" or "down" eg:
+          api/articles/:article_id?vote=up
+        </p>
+        <h3>
+          <Strong>PUT</Strong> /api/comments/:comment_id</h3>
+        <p>Increment or Decrement the votes of a comment by one. This route will require a vote query of "up" or "down" eg:
+          api/comments/:comment?vote=up
+        </p>
+        <h3>
+          <Strong>DELETE</Strong> /api/comments/:comment_id</h3>
+        <p>This will delete a valid comment with the given commment_id eg: api/users/5b3deafebc9b707a5c4d20ef</p>
+
+        <h3>
+          <Strong>GET</Strong> /api/users/:username</h3>
+        <p>This will grab a specific user using their username eg: api/users/jessjelly</p>
+        <h3>
+
+    </div>
+
+  </section>
+</body>
+
+</html>
