@@ -1,55 +1,64 @@
-NorthCoders News!
+<strong>NorthCoders News!</strong> <br><br>
 The project was to create a API using express and serve data through a seeded mongoDB database. The data is served from 4 different collections - Articles, and Comments which can be posted by Users and Topics which the Articles belong to.
 
-Prerequisites
+<strong>Prerequisites</strong> <br><br>
 Ensure you have at least NodeJS v6.1.0 and MongoDB v4.0.0 installed on your machine.
 
-Getting Started
+<strong>Getting Started</strong>
 
 1.  First of all Fork and Clone this repository to your machine
 2.  In the terminal CD to the cloned directory and run the following command: npm install
 3.  Create a config.js file within the root of the repository and copy the following code in
 
+```
 const config = {
-dev: {
-DB_URL: "mongodb://localhost:27017/NorthCoders_News"
-},
-test: {
-DB_URL: "mongodb://localhost:27017/nc-news-test"
-}
+  dev: {
+    DB_URL: "mongodb://localhost:27017/NorthCoders_News"
+  },
+  test: {
+    DB_URL: "mongodb://localhost:27017/nc-news-test"
+  }
 };
+```
 
 module.exports = config[process.env.NODE_ENV];
 
 4.  Run mongod within the terminal
 
-Seeding the database
+```
+mongod
+```
+
+<strong>Seeding the database</strong>
 
 You should have connected to mongod and now you are ready to create your local DataBase to test/dev on.
 
 run the following command to seed the database:
 
+```
 npm run seed:dev
+```
 
-You should receive a Begining seed successfully done Console.log if the seed has completed
+You should receive a seed successfully done Console.log if the seed has completed
 
-Testing
+<strong>Testing</strong>
 
 To run the test database ensure you are CD'd to the repo and run the following command:
 
+```
 npm test
-
-Tests
+```
 
 The test file tests:
 
 1.  That the endpoints of the API function as they should do gaining the right results with the test data used
 2.  That errors are given for end points - 400 and 404
 
-Using the API
+<strong>Using the API</strong>
 
 The below are all available endpoints, you can use a browser preferably google chrome to connect to localhost:9090/api to get any GET requests. I recommend using PostMan for anything else - POST PUT DELETE etc
 
+```
 GET /api
 Is the HomePage
 
@@ -79,8 +88,8 @@ This will delete a valid comment with the given commment_id eg: api/users/5b3dea
 
 GET /api/users/:username
 This will grab a specific user using their username eg: api/users/jessjelly
-
-Hosted App deployed on Heroku
+```
+<strong>Hosted App deployed on Heroku</strong>
 
 The following link is the main API page of the application:
 
@@ -88,7 +97,7 @@ https://wrichri-northcoders-news.herokuapp.com/api
 
 MongoDB hosted on Mlabs
 
-Built With
+<strong>Built With</strong>
 
 The app was built with:
 
@@ -96,8 +105,8 @@ node.js
 Express - to create a restful api
 mongoose - to integrate with the database
 
-Authors
+<strong>Authors</strong>
 Christopher Wright - NorthCoders News
 
-Acknowledgments
+<strong>Acknowledgments</strong>
 The tutors at NorthCoders for being awesome at what they do!
