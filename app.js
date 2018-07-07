@@ -11,7 +11,6 @@ mongoose.connect(
   DB_URL,
   { useNewUrlParser: true }
 );
-app.set("view engine", "ejs");
 app.get("/", (req, res) => {
   res.status(200).send("Add API onto the URL link to get to the right page");
 });
