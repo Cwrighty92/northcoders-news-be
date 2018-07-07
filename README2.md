@@ -88,7 +88,7 @@ This will delete a valid comment with the given commment_id eg: api/users/5b3dea
 GET /api/users/:username
 This will grab a specific user using their username eg: api/users/jessjelly
 
-Hosted App deployed on Heroku
+<strong>Hosted App deployed on Heroku</strong>
 
 The following link is the main API page of the application:
 
@@ -96,7 +96,7 @@ https://wrichri-northcoders-news.herokuapp.com/api
 
 MongoDB hosted on Mlabs
 
-Built With
+<strong>Built With</strong>
 
 The app was built with:
 
@@ -104,8 +104,8 @@ node.js
 Express - to create a restful api
 mongoose - to integrate with the database
 
-Authors
+<strong>Authors</strong>
 Christopher Wright - NorthCoders News
 
-Acknowledgments
+<strong>Acknowledgments</strong>
 The tutors at NorthCoders for being awesome at what they do!
