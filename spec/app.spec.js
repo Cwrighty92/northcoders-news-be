@@ -446,15 +446,15 @@ describe("BeforeEachTest<<<<", () => {
             expect(res.body).to.be.empty;
           });
       });
-      it("DELETE returns status 204 and body is empty", () => {
+      it("DELETE returns status 204 and body is empty on a different comment", () => {
         return request
-          .delete(`/api/comments/${commentDoc[0]._id}`)
+          .delete(`/api/comments/${commentDoc[1]._id}`)
           .expect(204)
           .then(res => {
             expect(res.body).to.be.empty;
           });
       });
-      it("DELETE returns status 204 and body is empty", () => {
+      it("DELETE returns status 400 if id does not exist", () => {
         return request
           .delete(`/api/comments/asdasdasda`)
           .expect(400)
