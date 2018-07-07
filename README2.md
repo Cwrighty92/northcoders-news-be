@@ -1,10 +1,10 @@
-NorthCoders News!
+<strong>NorthCoders News!</strong> <br><br>
 The project was to create a API using express and serve data through a seeded mongoDB database. The data is served from 4 different collections - Articles, and Comments which can be posted by Users and Topics which the Articles belong to.
 
-Prerequisites
+<strong>Prerequisites</strong> <br><br>
 Ensure you have at least NodeJS v6.1.0 and MongoDB v4.0.0 installed on your machine.
 
-Getting Started
+<strong>Getting Started</strong>
 
 1.  First of all Fork and Clone this repository to your machine
 2.  In the terminal CD to the cloned directory and run the following command: npm install
@@ -23,7 +23,7 @@ module.exports = config[process.env.NODE_ENV];
 
 4.  Run mongod within the terminal
 
-Seeding the database
+<strong>Seeding the database</strong>
 
 You should have connected to mongod and now you are ready to create your local DataBase to test/dev on.
 
@@ -31,22 +31,20 @@ run the following command to seed the database:
 
 npm run seed:dev
 
-You should receive a Begining seed successfully done Console.log if the seed has completed
+You should receive a seed successfully done Console.log if the seed has completed
 
-Testing
+<strong>Testing</strong>
 
 To run the test database ensure you are CD'd to the repo and run the following command:
 
 npm test
-
-Tests
 
 The test file tests:
 
 1.  That the endpoints of the API function as they should do gaining the right results with the test data used
 2.  That errors are given for end points - 400 and 404
 
-Using the API
+<strong>Using the API</strong>
 
 The below are all available endpoints, you can use a browser preferably google chrome to connect to localhost:9090/api to get any GET requests. I recommend using PostMan for anything else - POST PUT DELETE etc
 
