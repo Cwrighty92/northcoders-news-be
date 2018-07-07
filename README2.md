@@ -58,6 +58,7 @@ The test file tests:
 
 The below are all available endpoints, you can use a browser preferably google chrome to connect to localhost:9090/api to get any GET requests. I recommend using PostMan for anything else - POST PUT DELETE etc
 
+```
 GET /api
 Is the HomePage
 
@@ -87,7 +88,7 @@ This will delete a valid comment with the given commment_id eg: api/users/5b3dea
 
 GET /api/users/:username
 This will grab a specific user using their username eg: api/users/jessjelly
-
+```
 <strong>Hosted App deployed on Heroku</strong>
 
 The following link is the main API page of the application:
