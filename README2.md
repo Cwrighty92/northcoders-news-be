@@ -12,12 +12,12 @@ Ensure you have at least NodeJS v6.1.0 and MongoDB v4.0.0 installed on your mach
 
 ```
 const config = {
-dev: {
-DB_URL: "mongodb://localhost:27017/NorthCoders_News"
-},
-test: {
-DB_URL: "mongodb://localhost:27017/nc-news-test"
-}
+  dev: {
+    DB_URL: "mongodb://localhost:27017/NorthCoders_News"
+  },
+  test: {
+    DB_URL: "mongodb://localhost:27017/nc-news-test"
+  }
 };
 ```
 
