@@ -7,7 +7,12 @@ Ensure you have at least NodeJS v6.1.0 and MongoDB v4.0.0 installed on your mach
 <strong>Getting Started</strong>
 
 1.  First of all Fork and Clone this repository to your machine
-2.  In the terminal CD to the cloned directory and run the following command: npm install
+2.  In the terminal CD to the cloned directory and run the following command:
+
+```
+npm install
+```
+
 3.  Create a config.js file within the root of the repository and copy the following code in
 
 ```
@@ -89,6 +94,7 @@ This will delete a valid comment with the given commment_id eg: api/users/5b3dea
 GET /api/users/:username
 This will grab a specific user using their username eg: api/users/jessjelly
 ```
+
 <strong>Hosted App deployed on Heroku</strong>
 
 The following link is the main API page of the application:
