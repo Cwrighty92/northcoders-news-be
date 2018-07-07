@@ -10,6 +10,7 @@ Ensure you have at least NodeJS v6.1.0 and MongoDB v4.0.0 installed on your mach
 2.  In the terminal CD to the cloned directory and run the following command: npm install
 3.  Create a config.js file within the root of the repository and copy the following code in
 
+```
 const config = {
 dev: {
 DB_URL: "mongodb://localhost:27017/NorthCoders_News"
@@ -18,10 +19,15 @@ test: {
 DB_URL: "mongodb://localhost:27017/nc-news-test"
 }
 };
+```
 
 module.exports = config[process.env.NODE_ENV];
 
 4.  Run mongod within the terminal
+
+```
+mongod
+```
 
 <strong>Seeding the database</strong>
 
@@ -29,7 +35,9 @@ You should have connected to mongod and now you are ready to create your local D
 
 run the following command to seed the database:
 
+```
 npm run seed:dev
+```
 
 You should receive a seed successfully done Console.log if the seed has completed
 
@@ -37,7 +45,9 @@ You should receive a seed successfully done Console.log if the seed has complete
 
 To run the test database ensure you are CD'd to the repo and run the following command:
 
+```
 npm test
+```
 
 The test file tests:
 
