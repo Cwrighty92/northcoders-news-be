@@ -18,10 +18,4 @@ app.use("/api", apiRouter);
 
 app.use(handleErrors);
 
-app.use((err, req, res, next) => {
-  res
-    .status(500)
-    .send({ message: "Server Error, Apologies for the inconvinience" });
-});
-
 module.exports = app;

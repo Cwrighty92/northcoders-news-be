@@ -1,7 +1,6 @@
 const data = require("./devData/dataLinks");
 const mongoose = require("mongoose");
 const { DB_URL } = require("../config");
-console.log(DB_URL);
 const seedDB = require("./seed");
 
 mongoose

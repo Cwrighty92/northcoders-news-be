@@ -16,6 +16,8 @@ npm install
 3.  Create a config.js file within the root of the repository and copy the following code in
 
 ```
+process.env.NODE_ENV = process.env.NODE_ENV || "dev";
+
 const config = {
   dev: {
     DB_URL: "mongodb://localhost:27017/NorthCoders_News"
@@ -36,7 +38,7 @@ mongod
 
 <strong>Seeding the database</strong>
 
-You should have connected to mongod and now you are ready to create your local DataBase to test/dev on.
+You should now be listening to mongod and now you are ready to create your local DataBase to test/dev on.
 
 run the following command to seed the database:
 
@@ -57,11 +59,13 @@ npm test
 The test file tests:
 
 1.  That the endpoints of the API function as they should do gaining the right results with the test data used
-2.  That errors are given for end points - 400 and 404
+2.  That errors are being sent under given circumstances such as an invalid input which could be in a wrong format or a non exsisting ID
 
 <strong>Using the API</strong>
 
-The below are all available endpoints, you can use a browser preferably google chrome to connect to localhost:9090/api to get any GET requests. I recommend using PostMan for anything else - POST PUT DELETE etc
+The below are all available endpoints, you can use a browser preferably google chrome to connect to localhost:9090/api to get any GET requests. I recommend using PostMan for anything else - POST, PUT or DELETE the link is below, follow the instructions to sign up and connect
+
+https://www.getpostman.com/
 
 ```
 GET /api
