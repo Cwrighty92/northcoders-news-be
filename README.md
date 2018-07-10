@@ -80,6 +80,9 @@ Using a valid topic_id gained from Get /api/topics Return all articles for that 
 GET /api/articles
 Returns all articles
 
+GET /api/articles/:articleId
+Returns Single article by ID
+
 GET/api/articles/:aritcle_id/comments
 Using a valid article_id gained from Get api/articles Return all comments for that Article
 
@@ -94,6 +97,9 @@ Increment or Decrement the votes of a comment by one. This route will require a 
 
 DELETE /api/comments/:comment_id
 This will delete a valid comment with the given commment_id eg: api/users/5b3deafebc9b707a5c4d20ef
+
+GET /api/users
+Gets all the users
 
 GET /api/users/:username
 This will grab a specific user using their username eg: api/users/jessjelly
