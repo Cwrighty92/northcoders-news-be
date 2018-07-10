@@ -19,6 +19,10 @@ const handleErrors = (err, req, res, next) => {
     res.status(404).send({
       message: "Page not found with given userName, it does not exist"
     });
+  } else if (err.message === "No article found with given article ID") {
+    res.status(404).send({
+      message: "Page not found with given article ID, it does not exist"
+    });
   } else if (err.message === "Page not found") {
     res.status(404).send({ message: "Page not found for given Id" });
   } else if (err.name === "CastError") {

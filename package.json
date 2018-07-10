@@ -12,12 +12,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "eslint": "^5.1.0"
+    "tslint": "^4.5.1"
   },
   "devDependencies": {
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "ejs": "^2.6.1",
+    "eslint": "^5.1.0",
     "express": "^4.16.3",
     "mocha": "^5.2.0",
     "mongoose": "^5.2.1",

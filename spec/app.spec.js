@@ -157,7 +157,7 @@ describe("BeforeEachTest<<<<", () => {
           });
       });
     });
-    describe.only("<<<<<<<<<<Users>>>>>>>>>", () => {
+    describe("<<<<<<<<<<Users>>>>>>>>>", () => {
       it("Returns all Topics with Status 200 with valid url", () => {
         return request
           .get(`/api/users`)
@@ -223,7 +223,7 @@ describe("BeforeEachTest<<<<", () => {
           });
       });
     });
-    describe("<<<<<<<<<<<Articles>>>>>>>>>>>", () => {
+    describe.only("<<<<<<<<<<<Articles>>>>>>>>>>>", () => {
       it("Check can get all articles and also status 200", () => {
         return request
           .get("/api/articles")
@@ -243,6 +243,25 @@ describe("BeforeEachTest<<<<", () => {
             );
           });
       });
+
+      it("Test can get single article", () => {
+        return request
+          .get(`/api/articles/${articleDoc[0]._id}`)
+          .expect(200)
+          .then(res => {
+            expect(res.body.article).to.have.all.keys(
+              "votes",
+              "_id",
+              "title",
+              "created_by",
+              "body",
+              "created_at",
+              "belongs_to",
+              "__v"
+            );
+          });
+      });
+
       it("Check can get all of one articles comments", () => {
         return request
           .get(`/api/articles/${articleDoc[0]._id}/comments`)

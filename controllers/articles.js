@@ -72,17 +72,15 @@ const upVoteAndDownVote = (req, res, next) => {
 
 // get article - working needs testing
 const getArticle = (req, res, next) => {
-  console.log(req.params);
   const articleId = req.params;
-  console.log(articleId.article);
   Article.findOne({ _id: articleId.article })
-    .then(user => {
-      if (user === null || undefined)
+    .then(article => {
+      if (article === null || undefined)
         next({
           status: 404,
-          message: `No user found with given userName`
+          message: `No article found with given article ID`
         });
-      else res.status(200).send({ user });
+      else res.status(200).send({ article });
     })
     .catch(next);
 };
