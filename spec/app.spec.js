@@ -223,7 +223,7 @@ describe("BeforeEachTest<<<<", () => {
           });
       });
     });
-    describe.only("<<<<<<<<<<<Articles>>>>>>>>>>>", () => {
+    describe("<<<<<<<<<<<Articles>>>>>>>>>>>", () => {
       it("Check can get all articles and also status 200", () => {
         return request
           .get("/api/articles")
@@ -397,7 +397,7 @@ describe("BeforeEachTest<<<<", () => {
       });
     });
 
-    describe("<<<<<<<<<Comments>>>>>>>>>>>>", () => {
+    describe.only("<<<<<<<<<Comments>>>>>>>>>>>>", () => {
       it("Check can get all comments and also status 200", () => {
         return request
           .get("/api/comments")

@@ -13,20 +13,22 @@ const getAllComments = (req, res, next) => {
 
 //completed tests
 const voteCommentUpAndDown = (req, res, next) => {
-  if (req.query.vote === "up" || req.query.vote === "down") {
-    const voteInc =
-      req.query.vote === "up" ? 1 : req.query.vote === "down" ? -1 : 0;
-    Comment.update({ _id: req.params.comment }, { $inc: { votes: voteInc } })
-      .then(comment => {
-        res.status(200).send({ msg: "You have voted on a comment", comment });
-      })
-      .catch(next);
-  } else
-    next({
-      status: 400,
-      message: "Bad request: Only takes up or down query to make a vote "
-    });
+  const voteInc =
+    req.query.vote === "up"
+      ? 1
+      : req.query.vote === "down"
+        ? -1
+        : next({
+            status: 400,
+            message: "Bad request: Only takes up or down query to make a vote "
+          });
+  Comment.update({ _id: req.params.comment }, { $inc: { votes: voteInc } })
+    .then(comment => {
+      res.status(200).send({ msg: "You have voted on a comment", comment });
+    })
+    .catch(next);
 };
+
 //completed tests
 const deleteComment = (req, res, next) => {
   Comment.findByIdAndRemove(req.params.comment)

@@ -28,6 +28,24 @@ const getAllArticles = (req, res, next) => {
     })
     .catch(next);
 };
+
+// get article - working needs testing
+const getArticle = (req, res, next) => {
+  const articleId = req.params;
+  Article.findOne({ _id: articleId.article })
+    .populate("belongs_to", "slug -_id")
+    .populate("created_by", "username")
+    .then(article => {
+      if (article === null || undefined)
+        next({
+          status: 404,
+          message: `No article found with given article ID`
+        });
+      else res.status(200).send({ article });
+    })
+    .catch(next);
+};
+
 //completed tests
 const getCommentsInArticle = (req, res, next) => {
   Comment.find({ belongs_to: req.params.article })
@@ -68,21 +86,6 @@ const upVoteAndDownVote = (req, res, next) => {
       status: 400,
       message: "Bad request: Only takes up or down query to make a vote "
     });
-};
-
-// get article - working needs testing
-const getArticle = (req, res, next) => {
-  const articleId = req.params;
-  Article.findOne({ _id: articleId.article })
-    .then(article => {
-      if (article === null || undefined)
-        next({
-          status: 404,
-          message: `No article found with given article ID`
-        });
-      else res.status(200).send({ article });
-    })
-    .catch(next);
 };
 
 module.exports = {

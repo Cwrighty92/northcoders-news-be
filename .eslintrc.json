@@ -9,7 +9,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "indent": ["error", "spaces"],
+    "indent": ["error", "tabs"],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "double"],
     "semi": ["error", "always"]

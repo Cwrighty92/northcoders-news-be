@@ -24,29 +24,20 @@ const seedDB = (topicData, userData, articleData, commentData) => {
         ),
         topicIdDocs,
         userIdDocs,
-        topicLookUpObject,
         userLookUpObject
       ]);
     })
-    .then(
-      ([
-        articleIdDocs,
+    .then(([articleIdDocs, topicIdDocs, userIdDocs, userLookUpObject]) => {
+      const articleLookUpObject = createRefObject(articleIdDocs, "title");
+      return Promise.all([
+        Comment.insertMany(
+          editCommentData(articleLookUpObject, userLookUpObject, commentData)
+        ),
         topicIdDocs,
         userIdDocs,
-        topicLookUpObject,
-        userLookUpObject
-      ]) => {
-        const articleLookUpObject = createRefObject(articleIdDocs, "title");
-        return Promise.all([
-          Comment.insertMany(
-            editCommentData(articleLookUpObject, userLookUpObject, commentData)
-          ),
-          topicIdDocs,
-          userIdDocs,
-          articleIdDocs
-        ]);
-      }
-    )
+        articleIdDocs
+      ]);
+    })
     .catch(console.log);
 };
 
