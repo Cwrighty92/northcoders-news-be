@@ -3,12 +3,16 @@ const {
   getAllArticles,
   getCommentsInArticle,
   addCommentToArticle,
-  upVoteAndDownVote
+  upVoteAndDownVote,
+  getArticle
 } = require("../controllers/articles");
 
 articleRouter.route("/").get(getAllArticles);
 
-articleRouter.route("/:article").put(upVoteAndDownVote);
+articleRouter
+  .route("/:article")
+  .put(upVoteAndDownVote)
+  .get(getArticle);
 
 articleRouter
   .route("/:article/comments")

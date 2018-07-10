@@ -1,5 +1,13 @@
 const { User } = require("../models/index");
 
+const getAllUsers = (req, res, next) => {
+  return User.find()
+    .then(users => {
+      res.status(200).send({ users });
+    })
+    .catch(next);
+};
+
 //completed tests
 const getUser = (req, res, next) => {
   const userId = req.params;
@@ -15,4 +23,4 @@ const getUser = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = getUser;
+module.exports = { getUser, getAllUsers };

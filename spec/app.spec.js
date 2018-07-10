@@ -157,7 +157,23 @@ describe("BeforeEachTest<<<<", () => {
           });
       });
     });
-    describe("<<<<<<<<<<Users>>>>>>>>>", () => {
+    describe.only("<<<<<<<<<<Users>>>>>>>>>", () => {
+      it("Returns all Topics with Status 200 with valid url", () => {
+        return request
+          .get(`/api/users`)
+          .expect(200)
+          .then(res => {
+            expect(res.body.users.length).to.equal(2);
+            expect(res.body.users[0].username).to.equal("butter_bridge");
+            expect(res.body.users[0]).to.have.all.keys(
+              "_id",
+              "username",
+              "name",
+              "avatar_url",
+              "__v"
+            );
+          });
+      });
       it("Check we can grab the user by searching with the userID with a status of 200", () => {
         return request
           .get("/api/users/dedekind561")

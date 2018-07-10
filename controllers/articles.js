@@ -70,9 +70,27 @@ const upVoteAndDownVote = (req, res, next) => {
     });
 };
 
+// get article - working needs testing
+const getArticle = (req, res, next) => {
+  console.log(req.params);
+  const articleId = req.params;
+  console.log(articleId.article);
+  Article.findOne({ _id: articleId.article })
+    .then(user => {
+      if (user === null || undefined)
+        next({
+          status: 404,
+          message: `No user found with given userName`
+        });
+      else res.status(200).send({ user });
+    })
+    .catch(next);
+};
+
 module.exports = {
   getAllArticles,
   getCommentsInArticle,
   addCommentToArticle,
-  upVoteAndDownVote
+  upVoteAndDownVote,
+  getArticle
 };
