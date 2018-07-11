@@ -244,7 +244,7 @@ describe("BeforeEachTest<<<<", () => {
           });
       });
 
-      it("Test can get single article", () => {
+      it.only("Test can get single article", () => {
         return request
           .get(`/api/articles/${articleDoc[0]._id}`)
           .expect(200)
@@ -257,7 +257,28 @@ describe("BeforeEachTest<<<<", () => {
               "body",
               "created_at",
               "belongs_to",
-              "__v"
+              "__v",
+              "commentCount"
+            );
+          });
+      });
+      it.only("Test for a bad request that responds with status 400", () => {
+        return request
+          .get(`/api/articles/hasdhashdah`)
+          .expect(400)
+          .then(res => {
+            expect(res.body.message).to.equal(
+              "hasdhashdah is in an incorrect format or does not exist Check the ReadMe"
+            );
+          });
+      });
+      it.only("Test for a incorrect request that responds with status 404", () => {
+        return request
+          .get(`/api/articles/5b45d3bbf53ae81087be0dax`)
+          .expect(400)
+          .then(res => {
+            expect(res.body.message).to.equal(
+              "5b45d3bbf53ae81087be0dax is in an incorrect format or does not exist Check the ReadMe"
             );
           });
       });
@@ -397,7 +418,7 @@ describe("BeforeEachTest<<<<", () => {
       });
     });
 
-    describe.only("<<<<<<<<<Comments>>>>>>>>>>>>", () => {
+    describe("<<<<<<<<<Comments>>>>>>>>>>>>", () => {
       it("Check can get all comments and also status 200", () => {
         return request
           .get("/api/comments")

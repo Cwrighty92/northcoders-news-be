@@ -41,7 +41,15 @@ const getArticle = (req, res, next) => {
           status: 404,
           message: `No article found with given article ID`
         });
-      else res.status(200).send({ article });
+      else
+        return Promise.all([
+          article,
+          Comment.countDocuments({ belongs_to: article._id })
+        ]);
+    })
+    .then(([article, commentCount]) => {
+      article = { ...article._doc, commentCount: commentCount };
+      res.send({ article });
     })
     .catch(next);
 };
