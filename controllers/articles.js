@@ -30,7 +30,7 @@ const getAllArticles = (req, res, next) => {
     .catch(next);
 };
 
-// get article - working needs testing
+// completed tests
 const getArticle = (req, res, next) => {
   const articleId = req.params;
   Article.findOne({ _id: articleId.article })
