@@ -9,12 +9,14 @@ const getAllArticles = (req, res, next) => {
     .lean()
     .then(articles => {
       const commentCounts = articles.map(article => {
-        return Comment.count({ belongs_to: article._id });
+        return Comment.countDocuments({ belongs_to: article._id });
       });
+
       commentCounts.push(articles);
       return Promise.all(commentCounts);
     })
     .then(commentCounts => {
+      console.log(commentCounts);
       const articlesWithoutComment = commentCounts.pop();
       const articles = articlesWithoutComment.map(article => {
         const { created_by } = article;

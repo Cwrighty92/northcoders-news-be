@@ -26,7 +26,7 @@ describe("BeforeEachTest<<<<", () => {
     return mongoose.disconnect();
   });
   describe("<<<<<<<NorthCoders News>>>>>>", () => {
-    describe("<<<<<<<<<Topics>>>>>>>>>", () => {
+    describe.only("<<<<<<<<<Topics>>>>>>>>>", () => {
       console.log("connecting");
       it("Returns all Topics with Status 200 with valid url", () => {
         return request
@@ -66,7 +66,8 @@ describe("BeforeEachTest<<<<", () => {
               "body",
               "created_at",
               "belongs_to",
-              "__v"
+              "__v",
+              "comment_count"
             );
           });
       });
@@ -244,7 +245,7 @@ describe("BeforeEachTest<<<<", () => {
           });
       });
 
-      it.only("Test can get single article", () => {
+      it("Test can get single article", () => {
         return request
           .get(`/api/articles/${articleDoc[0]._id}`)
           .expect(200)
@@ -262,7 +263,7 @@ describe("BeforeEachTest<<<<", () => {
             );
           });
       });
-      it.only("Test for a bad request that responds with status 400", () => {
+      it("Test for a bad request that responds with status 400", () => {
         return request
           .get(`/api/articles/hasdhashdah`)
           .expect(400)
@@ -272,7 +273,7 @@ describe("BeforeEachTest<<<<", () => {
             );
           });
       });
-      it.only("Test for a incorrect request that responds with status 404", () => {
+      it("Test for a incorrect request that responds with status 404", () => {
         return request
           .get(`/api/articles/5b45d3bbf53ae81087be0dax`)
           .expect(400)
