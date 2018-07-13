@@ -12,7 +12,7 @@ const getAllTopics = (req, res, next) => {
     .catch(next);
 };
 
-//completed tests - need to impliment CommentCount items in articles
+//completed tests
 const getAllArticlesByTopic = (req, res, next) => {
   Article.find({ belongs_to: req.params.topic })
     .populate("belongs_to", "slug -_id")

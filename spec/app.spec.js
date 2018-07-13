@@ -26,7 +26,7 @@ describe("BeforeEachTest<<<<", () => {
     return mongoose.disconnect();
   });
   describe("<<<<<<<NorthCoders News>>>>>>", () => {
-    describe.only("<<<<<<<<<Topics>>>>>>>>>", () => {
+    describe("<<<<<<<<<Topics>>>>>>>>>", () => {
       console.log("connecting");
       it("Returns all Topics with Status 200 with valid url", () => {
         return request
@@ -312,7 +312,7 @@ describe("BeforeEachTest<<<<", () => {
           });
       });
 
-      it("Check we can add a comment ot an article in test", () => {
+      it("Check we can add a comment onto an article in test", () => {
         return request
           .post(`/api/articles/${articleDoc[0]._id}/comments`)
           .send({

@@ -16,7 +16,6 @@ const getAllArticles = (req, res, next) => {
       return Promise.all(commentCounts);
     })
     .then(commentCounts => {
-      console.log(commentCounts);
       const articlesWithoutComment = commentCounts.pop();
       const articles = articlesWithoutComment.map(article => {
         const { created_by } = article;
@@ -63,7 +62,6 @@ const getCommentsInArticle = (req, res, next) => {
     .populate("belongs_to", "title -_id")
     .then(comments => {
       if (comments.length === 0) {
-        console.log(comments);
         next({ status: 404, message: "Page not found" });
       } else res.status(200).send({ comments });
     })
