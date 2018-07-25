@@ -16,6 +16,7 @@ const getAllTopics = (req, res, next) => {
 const getAllArticlesByTopic = (req, res, next) => {
   Article.find({ belongs_to: req.params.topic })
     .populate("belongs_to", "slug -_id")
+    .populate("created_by", "username -_id")
     .then(articles => {
       if (articles.length === 0) {
         next({ status: 404, message: "Page not found" });
