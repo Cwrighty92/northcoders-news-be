@@ -4,6 +4,8 @@ const apiRouter = require("./routes/api");
 const mongoose = require("mongoose");
 const DB_URL = process.env.DB_URL || require("./config").DB_URL;
 const handleErrors = require("./errorHandlers/error");
+const cors = require("cors");
+app.use(cors());
 app.use(bodyparser.json());
 app.set("view engine", "ejs");
 
