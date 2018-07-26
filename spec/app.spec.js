@@ -230,6 +230,7 @@ describe("BeforeEachTest<<<<", () => {
           .get("/api/articles")
           .expect(200)
           .then(res => {
+            console.log(res.body);
             expect(res.body.articles.length).to.equal(4);
             expect(res.body.articles[0]).to.have.all.keys(
               "votes",

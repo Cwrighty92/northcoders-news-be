@@ -12,20 +12,21 @@ const getAllArticles = (req, res, next) => {
         return Comment.countDocuments({ belongs_to: article._id });
       });
 
-      commentCounts.push(articles);
-      return Promise.all(commentCounts);
+      // commentCounts.push(articles);
+      return Promise.all([articles, ...commentCounts]);
     })
-    .then(commentCounts => {
-      const articlesWithoutComment = commentCounts.pop();
-      const articles = articlesWithoutComment.map(article => {
-        const { created_by } = article;
+    .then(([articles, ...commentCounts]) => {
+      // const articlesWithoutComment = commentCounts.pop();
+      const newarticles = articles.map((article, i) => {
+        // const { created_by } = article;
         const editedArticle = {
           ...article,
-          commentCount: commentCounts.shift()
+          commentCount: commentCounts[i]
         };
         return editedArticle;
       });
-      res.send({ articles });
+
+      res.send({ articles: newarticles });
     })
     .catch(next);
 };
