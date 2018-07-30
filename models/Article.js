@@ -16,7 +16,7 @@ const ArticleSchema = new Schema({
     default: 0
   },
   created_at: {
-    type: Date,
+    type: Number,
     default: Date.now
   },
   belongs_to: {
